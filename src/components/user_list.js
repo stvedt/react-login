@@ -7,7 +7,7 @@ const UserList = (props) => {
   });
 
   return (
-    <div className="user-list">
+    <div className="row user-list">
       {userDetails}
     </div>
   );
