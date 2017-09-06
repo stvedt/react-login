@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import UserDetail from './user_detail';
 
-const UserList = (props) => {
-  const userDetails = props.users.map( (user, index) => {
-    return <UserDetail user={user} key={index} />;
-  });
+class UserList extends Component {
+  constructor(props){
+    super(props)
 
-  return (
-    <div className="row user-list">
-      {userDetails}
-    </div>
-  );
+    this.state = {
+      filter: 'default'
+    }
+
+    this.userDetails = props.users.map( (user, index) => {
+      return <UserDetail user={user} key={index} />;
+    });
+  }
+
+
+
+  render (){
+    return (
+      <div className="row user-list">
+        {this.userDetails}
+      </div>
+    )
+  }
 }
 
 export default UserList;
