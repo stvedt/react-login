@@ -33,3 +33,25 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/* User Styling */
+.user {
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+}
+
+.user h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.user .age { font-style: italic; }
+
+.user .category { float: right; }
+
+.user.priority-1 { background-color: orange; }
+.user.priority-2 { background-color: green; }
+.user.priority-3 { background-color: blue; }
+.user.priority-4 { background-color: purple; }

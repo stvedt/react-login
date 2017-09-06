@@ -1,11 +1,66 @@
 import React, { Component } from 'react';
 import LoginForm from './login_form';
+import UserList from './user_list';
+
+const USERS = {
+  "data": [
+    {
+      "name": "Joe",
+      "age": 24,
+      "priority": 1,
+      "category": "cat2"
+    },
+    {
+      "name": "Jane",
+      "age": 76,
+      "priority": 4,
+      "category": "cat1"
+    },
+    {
+      "name": "Kevin",
+      "age": 32,
+      "priority": 2,
+      "category": "cat2"
+    },
+    {
+      "name": "Lucy",
+      "age": 54,
+      "priority": 1,
+      "category": "cat3"
+    },
+    {
+      "name": "Colin",
+      "age": 34,
+      "priority": 3,
+      "category": "cat1"
+    },
+    {
+      "name": "Franny",
+      "age": 36,
+      "priority": 2,
+      "category": "cat3"
+    },
+    {
+      "name": "Neil",
+      "age": 74,
+      "priority": 4,
+      "category": "cat2"
+    },
+    {
+      "name": "Katy",
+      "age": 55,
+      "priority": 3,
+      "category": "cat2"
+    }
+  ]
+};
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        <LoginForm />
+      <LoginForm />
+      <UserList users={USERS.data} />
       </div>
     );
   }
