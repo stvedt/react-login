@@ -4,6 +4,8 @@ export default class LoginForm extends Component {
   constructor(props){
     super(props);
 
+    this.approvedUsers = { "test@zola.com": "zola#frontend"};
+
     this.state = {
       email: '',
       password: '',
@@ -17,8 +19,8 @@ export default class LoginForm extends Component {
       <form className="form-signin" onSubmit={this.onFormSubmit}>
         <h2 className="form-signin-heading">Please sign in</h2>
 
-        <label className="sr-only" htmlFor="inputEmail" onChange={this.onEmailChange}>Email address</label>
-        <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required />
+        <label className="sr-only" htmlFor="inputEmail" >Email address</label>
+        <input type="email" id="inputEmail" className="form-control" placeholder="Email address" onChange={this.onEmailChange} required />
 
         <label className="sr-only" htmlFor="inputPassword">Password</label>
         <input type="password" id="inputPassword" placeholder="Password"
@@ -52,9 +54,16 @@ export default class LoginForm extends Component {
     return passwordRegex.test(password);
   }
 
+  isApprovedUser = (email) => {
+    //check if user is in approved list
+    return Boolean(this.approvedUsers[email]);
+  }
+
   onFormSubmit = (event) => {
     event.preventDefault();
-    console.log(event);
-    console.log('Form Submitted', this.state);
+    if (this.isApprovedUser(this.state.email) ){
+      console.log('approved!');
+      this.setState({loggedIn: true});
+    }
   }
 }
