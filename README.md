@@ -1,4 +1,4 @@
-# React Practice
+# React Login
 
 ### Key Features
 - Login Form with Validation
@@ -6,22 +6,6 @@
 - List of Users
 - Sorting of Users
 - Filtering of Users based on category (dynamically)
-
-### Dev Notes
-- Use bootstrap Alerts
-- React Router for Pages
-- LocalStorage for Session
-- Nice to Have: Sass
-- Consider lodash for sorting/Filtering
-- move compares and filter functions to separate helper
-
-#### Fake Cookie for Session
-I have used localStorage in place of cookies to create a session. I have yet to create a logout button but to reset the session run the following from the console:
-
-```
-localStorage.removeItem('loggedIn');
-```
-
 
 ### Local Environment Setup
 
@@ -31,3 +15,21 @@ localStorage.removeItem('loggedIn');
 ```
 
 Application will run on [http://localhost:8080/](http://localhost:8080/).
+
+### Dev Notes
+- Using bootstrap v4
+- LocalStorage for Session
+
+#### Fake Cookie for Session
+I have used localStorage in place of cookies to create a session. I have yet to create a logout button but to reset the session run the following from the console:
+
+```
+localStorage.removeItem('loggedIn');
+```
+
+### Nice to Haves
+- Sass
+- React Router for Pages
+- Consider lodash for sorting/Filtering
+- Add clear to filtering
+- Validation I initially made happen before submit for different user experience. Changed to submit to meet reqs and removed built in required to allow for custom messaging. Left red outline for some live feedback about correctness.

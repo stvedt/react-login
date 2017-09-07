@@ -8,8 +8,8 @@ export default class LoginForm extends Component {
     this.state = {
       email: '',
       password: '',
-      emailValid: true,
-      passwordValid: true,
+      emailValid: null,
+      passwordValid: null,
       statusMsg: ''
     };
   }
@@ -22,12 +22,12 @@ export default class LoginForm extends Component {
         <h2 className="form-signin-heading">Please log in:</h2>
 
         <label className="sr-only" htmlFor="inputEmail" >Email address</label>
-        <input type="email" id="inputEmail" className={"form-control " + (this.state.emailValid ? '' : 'error')} placeholder="Email address" onChange={this.onEmailChange} required />
+        <input type="text" id="inputEmail" className={"form-control " + (this.state.emailValid || this.state.emailValid === null ? '' : 'error')} placeholder="Email address" onChange={this.onEmailChange} />
 
         <label className="sr-only" htmlFor="inputPassword">Password</label>
         <input type="password" id="inputPassword" placeholder="Password"
-          className={"form-control " + (this.state.passwordValid ? '' : 'error')}
-          onChange={this.onPasswordChange} required/>
+          className={"form-control " + (this.state.passwordValid || this.state.passwordValid === null? '' : 'error')}
+          onChange={this.onPasswordChange} />
 
         <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
@@ -38,8 +38,9 @@ export default class LoginForm extends Component {
     let email = event.target.value;
     this.setState({
       email,
-      emailValid: this.isEmailValid(email)
+      emailValid: this.isEmailValid(email),
     });
+
   }
 
   onPasswordChange = (event) => {
@@ -72,6 +73,18 @@ export default class LoginForm extends Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
+    if( !this.isEmailValid(this.state.email)){
+      this.setState({emailValid: false})
+      this.setState({statusMsg: 'Email Not Valid'});
+      return;
+    }
+
+    if( !this.isPasswordValid(this.state.password)){
+      this.setState({passwordValid: false})
+      this.setState({statusMsg: 'Password must be 5 characters long and contain at least one special character: @#*$%^&+='});
+      return;
+    }
+
     if ( !this.isApprovedUser(this.state.email) ){
       //Denied - No User
       this.setState({statusMsg: 'Denied: User Does Not Exist'});

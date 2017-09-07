@@ -6,9 +6,8 @@ const UserDetail = ({user}) => {
       <div className="col-md-4">
         <div className={"user priority-" + user.priority}>
           <h2>{user.name}</h2>
-          <span className="age">{user.age}</span>
-          <span className="category badge badge-pill badge-secondary">{user.category}</span>
-          <p>Priority: {user.priority}</p>
+          <p className="age">Age: {user.age}</p>
+          <p>Category: {user.category}</p>
         </div>
       </div>
   )

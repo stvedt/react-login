@@ -6,16 +6,16 @@ class UserList extends Component {
   constructor(props){
     super(props);
     this.originalUserList = props.users.slice();//slice without pass by reference
-    this.uniqueCategories = [...new Set(props.users.map(item => item.category))]; //sets store unique only
+    this.uniqueCategories = [...new Set(props.users.map(item => item.category))].sort(compares.alphaCompareCatAsc); //sets store unique only
     this.state = {
       sort: 'default',
+      filter: 'default',
       userList: props.users
     }
   }
 
   changeSort = (event) => {
     let sortType = event.target.value;
-    console.log('apply filter', sortType);
     this.setState({ sort: sortType});
 
     let sortedList;
@@ -40,10 +40,15 @@ class UserList extends Component {
 
   changeFilter = (event) => {
     let filterType = event.target.value;
+    if (filterType === 'default') {
+      this.setState({filter: filterType });
+      this.setState({ userList: this.originalUserList });
+      return;
+    }
+
     let filteredList = this.props.users.filter((user)=>{
       return user.category === filterType;
     });
-    console.log('filter: ', filterType);
     this.setState({filter: filterType });
     this.setState({ userList: filteredList});
 
@@ -58,12 +63,11 @@ class UserList extends Component {
   renderCategoryOptions (categories) {
     return categories.map( (category, index) => {
       return (
-        <div className="radio" key={index}>
-          <label>
-            <input type="radio" value={category} checked={this.state.filter === category } onChange={this.changeFilter} />
-            {category}
+          <label className="custom-control custom-radio"key={index}>
+            <input className="custom-control-input" type="radio" value={category} checked={this.state.filter === category } onChange={this.changeFilter} />
+            <span className="custom-control-indicator"></span>
+            <span className="custom-control-description">{category}</span>
           </label>
-        </div>
       );
     });
     this.uniqueCategories
@@ -74,15 +78,28 @@ class UserList extends Component {
     return (
       <div>
         <div className="row">
-          <select onChange={this.changeSort}>
-            <option value='default'>Featured</option>
-            <option value='alpha-asc'>Asc</option>
-            <option value='alpha-des'>Des</option>
-            <option value='priority'>VIP</option>
-          </select>
-          <div className="radio-group">
-            { this.renderCategoryOptions(this.uniqueCategories) }
-          </div>
+          <div className="col-md-12"><h1>Users</h1><hr/></div>
+        </div>
+        <div className="row filter-sort">
+          <div className="col-md-4 sort">
+            <div className="form-group">
+                <select className="form-control" onChange={this.changeSort}>
+                  <option value='default'>Featured</option>
+                  <option value='alpha-asc'>Asc</option>
+                  <option value='alpha-des'>Des</option>
+                  <option value='priority'>VIP</option>
+                </select>
+              </div>
+            </div>
+            <div className="col-md-8 filter">
+              Filter by Category:
+              <label className="custom-control custom-radio">
+                <input className="custom-control-input" type="radio" value="default" checked={this.state.filter === 'default' } onChange={this.changeFilter} />
+                <span className="custom-control-indicator"></span>
+                <span className="custom-control-description">None</span>
+              </label>
+              { this.renderCategoryOptions(this.uniqueCategories) }
+            </div>
         </div>
         <div className="row user-list">
           { this.renderUserDetails(this.state.userList) }
