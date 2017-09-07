@@ -10,7 +10,8 @@ class UserList extends Component {
     this.state = {
       sort: 'default',
       filter: 'default',
-      userList: props.users
+      userList: props.users,
+      sortedUserList: this.originalUserList
     }
   }
 
@@ -22,31 +23,34 @@ class UserList extends Component {
     switch(sortType){
       case 'default':
         sortedList = this.originalUserList;
+        this.setState({filter:'default'})
         break;
       case 'alpha-asc':
-        sortedList = this.props.users.sort(compares.alphaCompareAsc);
+        sortedList = this.state.userList.sort(compares.alphaCompareAsc);
         break;
       case 'alpha-des':
-        sortedList = this.props.users.sort(compares.alphaCompareDes);
+        sortedList = this.state.userList.sort(compares.alphaCompareDes);
         break;
       case 'priority':
-        sortedList = this.props.users.sort(compares.priorityCompareAsc);
+        sortedList = this.state.userList.sort(compares.priorityCompareAsc);
         break;
     }
 
-    this.setState({ userList: sortedList});
-
+    this.setState({
+      sortedUserList: sortedList,
+      userList: sortedList
+    });
   }
 
   changeFilter = (event) => {
     let filterType = event.target.value;
     if (filterType === 'default') {
       this.setState({filter: filterType });
-      this.setState({ userList: this.originalUserList });
+      this.setState({ userList: this.state.sortedUserList });
       return;
     }
 
-    let filteredList = this.props.users.filter((user)=>{
+    let filteredList = this.state.sortedUserList.filter((user)=>{
       return user.category === filterType;
     });
     this.setState({filter: filterType });
