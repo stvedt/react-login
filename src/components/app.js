@@ -58,31 +58,26 @@ const USERS = {
 export default class App extends Component {
   constructor(props){
     super(props);
-
     let loggedInFakeCookie = Boolean(localStorage.getItem('loggedIn'));
-    console.log(loggedInFakeCookie);
-
     this.state = {
       loggedIn: loggedInFakeCookie
     }
   }
 
-  render() {
-
-    if ( this.state.loggedIn ){
-      return <UserList users={USERS.data} />
-    } else {
-      return <LoginForm action={this.updateLoggedInState}/>
-    }
-  }
   updateLoggedInState = ( isLoggedIn ) => {
-    console.log('call updateLoggedIn');
     if(isLoggedIn) {
         localStorage.setItem('loggedIn', true);
     } else {
       localStorage.removeItem('loggedIn'); //cannot pass boolean because localStorage stores only string value and string "false" is truthy
     }
-
     this.setState({ loggedIn: isLoggedIn });
+  }
+
+  render() {
+    if ( this.state.loggedIn ){
+      return <UserList users={USERS.data} />
+    } else {
+      return <LoginForm action={this.updateLoggedInState}/>
+    }
   }
 }
