@@ -96,6 +96,7 @@ export default class LoginForm extends Component {
       //Authenticated
       console.log('Authenticated. Enter!');
       this.setState({statusMsg: ''});
+      this.props.action(true);//pass true loggedIn to update main app loggedIn state
     } else {
       console.log('Denied: Password Is Incorrect');
       this.setState({statusMsg: 'Denied: Password Is Incorrect'});
