@@ -6,7 +6,7 @@ class UserList extends Component {
   constructor(props){
     super(props);
     this.originalUserList = props.users.slice();//slice without pass by reference
-    this.uniqueCategories = [...new Set(props.users.map(item => item.category))]; //sets store unique only
+    this.uniqueCategories = [...new Set(props.users.map(item => item.category))].sort(compares.alphaCompareCatAsc); //sets store unique only
     this.state = {
       sort: 'default',
       userList: props.users
