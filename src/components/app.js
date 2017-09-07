@@ -75,7 +75,9 @@ export default class App extends Component {
 
   render() {
     if ( this.state.loggedIn ){
-      return <UserList users={USERS.data} />
+      return (
+          <UserList users={USERS.data} />
+      )
     } else {
       return <LoginForm action={this.updateLoggedInState}/>
     }

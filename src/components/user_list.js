@@ -9,6 +9,7 @@ class UserList extends Component {
     this.uniqueCategories = [...new Set(props.users.map(item => item.category))].sort(compares.alphaCompareCatAsc); //sets store unique only
     this.state = {
       sort: 'default',
+      filter: 'default',
       userList: props.users
     }
   }
@@ -39,6 +40,12 @@ class UserList extends Component {
 
   changeFilter = (event) => {
     let filterType = event.target.value;
+    if (filterType === 'default') {
+      this.setState({filter: filterType });
+      this.setState({ userList: this.originalUserList });
+      return;
+    }
+
     let filteredList = this.props.users.filter((user)=>{
       return user.category === filterType;
     });
@@ -85,7 +92,13 @@ class UserList extends Component {
               </div>
             </div>
             <div className="col-md-8 filter">
-              Filter by Category: { this.renderCategoryOptions(this.uniqueCategories) }
+              Filter by Category:
+              <label className="custom-control custom-radio">
+                <input className="custom-control-input" type="radio" value="default" checked={this.state.filter === 'default' } onChange={this.changeFilter} />
+                <span className="custom-control-indicator"></span>
+                <span className="custom-control-description">None</span>
+              </label>
+              { this.renderCategoryOptions(this.uniqueCategories) }
             </div>
         </div>
         <div className="row user-list">
