@@ -5,8 +5,9 @@ class UserList extends Component {
   constructor(props){
     super(props);
     this.originalUserList = props.users.slice();//slice without pass by reference
+    this.uniqueCategories = [...new Set(props.users.map(item => item.category))]; //sets store unique only
     this.state = {
-      filter: 'default',
+      sort: 'default',
       userList: props.users
     }
 
@@ -38,12 +39,12 @@ class UserList extends Component {
   }
 
   changeSort = (event) => {
-    let filterSort = event.target.value;
-    console.log('apply filter', filterSort);
-    this.setState({ filter: filterSort});
+    let sortType = event.target.value;
+    console.log('apply filter', sortType);
+    this.setState({ sort: sortType});
 
     let sortedList;
-    switch(filterSort){
+    switch(sortType){
       case 'default':
         sortedList = this.originalUserList;
         break;
@@ -62,10 +63,35 @@ class UserList extends Component {
 
   }
 
+  changeFilter = (event) => {
+    let filterType = event.target.value;
+    let filteredList = this.props.users.filter((user)=>{
+      return user.category === filterType;
+    });
+    console.log('filter: ', filterType);
+    this.setState({filter: filterType });
+    this.setState({ userList: filteredList});
+
+  }
+
   renderUserDetails( users ) {
     return users.map( (user, index) => {
       return <UserDetail user={user} key={index} />;
     });
+  }
+
+  renderCategoryOptions (categories) {
+    return categories.map( (category, index) => {
+      return (
+        <div className="radio" key={index}>
+          <label>
+            <input type="radio" value={category} checked={this.state.filter === category } onChange={this.changeFilter} />
+            {category}
+          </label>
+        </div>
+      );
+    });
+    this.uniqueCategories
   }
 
 
@@ -79,6 +105,9 @@ class UserList extends Component {
             <option value='alpha-des'>Des</option>
             <option value='priority'>VIP</option>
           </select>
+          <div className="radio-group">
+            { this.renderCategoryOptions(this.uniqueCategories) }
+          </div>
         </div>
         <div className="row user-list">
           { this.renderUserDetails(this.state.userList) }
