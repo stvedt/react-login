@@ -8,6 +8,7 @@ const UserDetail = ({user}) => {
           <h2>{user.name}</h2>
           <span className="age">{user.age}</span>
           <span className="category badge badge-pill badge-secondary">{user.category}</span>
+          <p>Priority: {user.priority}</p>
         </div>
       </div>
   )
