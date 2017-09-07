@@ -40,6 +40,12 @@ p {
   border-top-right-radius: 0;
 }
 
+/* Log Out */
+.logout {
+  float: right;
+  clear: both;
+}
+
 /* User Styling */
 .user {
   padding: 10px;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './login_form';
 import UserList from './user_list';
+import LogOut from './log_out';
 
 const USERS = {
   "data": [
@@ -76,10 +77,13 @@ export default class App extends Component {
   render() {
     if ( this.state.loggedIn ){
       return (
+        <div>
+          <LogOut action={this.updateLoggedInState} />
           <UserList users={USERS.data} />
+        </div>
       )
     } else {
-      return <LoginForm action={this.updateLoggedInState}/>
+      return <LoginForm action={this.updateLoggedInState} />
     }
   }
 }
