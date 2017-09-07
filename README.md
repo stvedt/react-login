@@ -32,3 +32,4 @@ localStorage.removeItem('loggedIn');
 - React Router for Pages
 - Consider lodash for sorting/Filtering
 - Add clear to filtering
+- Validation I initially made happen before submit for different user experience. Changed to submit to meet reqs and removed built in required to allow for custom messaging. Left red outline for some live feedback about correctness.
