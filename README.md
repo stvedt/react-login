@@ -26,3 +26,4 @@ Application will run on [http://localhost:8080/](http://localhost:8080/).
 - Consider lodash for sorting/Filtering
 - Validation I initially made happen before submit for different user experience. Changed to submit to meet reqs and removed built in required to allow for custom messaging. Left red outline for some live feedback about correctness.
 - VIP is sorting by priority. If only wishing to display priority 1 & 2 it would filter as well and is unintuitive.
+- The way the featured sort is being stored does not play as nicely as I'd like with filtering. So when choosing that sort I'm just removing any filters
