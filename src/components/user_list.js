@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserDetail from './user_detail';
+import * as compares from '../helpers/sort_compares';
 
 class UserList extends Component {
   constructor(props){
@@ -10,32 +11,6 @@ class UserList extends Component {
       sort: 'default',
       userList: props.users
     }
-
-  }
-
-  /* comparisons */
-  alphaCompareDes(a,b) {
-    if (a.name > b.name)
-      return -1;
-    if (a.name < b.name)
-      return 1;
-    return 0;
-  }
-
-  alphaCompareAsc(a,b) {
-    if (a.name < b.name)
-      return -1;
-    if (a.name > b.name)
-      return 1;
-    return 0;
-  }
-
-  priorityCompareAsc(a,b) {
-    if (a.priority < b.priority)
-      return -1;
-    if (a.priority > b.priority)
-      return 1;
-    return 0;
   }
 
   changeSort = (event) => {
@@ -49,13 +24,13 @@ class UserList extends Component {
         sortedList = this.originalUserList;
         break;
       case 'alpha-asc':
-        sortedList = this.props.users.sort(this.alphaCompareAsc);
+        sortedList = this.props.users.sort(compares.alphaCompareAsc);
         break;
       case 'alpha-des':
-        sortedList = this.props.users.sort(this.alphaCompareDes);
+        sortedList = this.props.users.sort(compares.alphaCompareDes);
         break;
       case 'priority':
-        sortedList = this.props.users.sort(this.priorityCompareAsc);
+        sortedList = this.props.users.sort(compares.priorityCompareAsc);
         break;
     }
 
