@@ -18,18 +18,11 @@ Application will run on [http://localhost:8080/](http://localhost:8080/).
 
 ### Dev Notes
 - Using bootstrap v4
-- LocalStorage for Session
-
-#### Fake Cookie for Session
-I have used localStorage in place of cookies to create a session. I have yet to create a logout button but to reset the session run the following from the console:
-
-```
-localStorage.removeItem('loggedIn');
-```
+- LocalStorage for Session management
 
 ### Nice to Haves
 - Sass
 - React Router for Pages
 - Consider lodash for sorting/Filtering
-- Add clear to filtering
 - Validation I initially made happen before submit for different user experience. Changed to submit to meet reqs and removed built in required to allow for custom messaging. Left red outline for some live feedback about correctness.
+- VIP is sorting by priority. If only wishing to display priority 1 & 2 it would filter as well and is unintuitive.
