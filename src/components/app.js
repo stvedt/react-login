@@ -56,12 +56,24 @@ const USERS = {
 };
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      loggedIn: false
+    }
+  }
+
   render() {
-    return (
-      <div>
-      <LoginForm />
-      <UserList users={USERS.data} />
-      </div>
-    );
+
+    if ( this.state.loggedIn ){
+      return <UserList users={USERS.data} />
+    } else {
+      return <LoginForm action={this.updateLoggedInState}/>
+    }
+  }
+  updateLoggedInState = ( isLoggedIn ) => {
+    console.log('call updateLoggedIn');
+    this.setState({ loggedIn: true });
   }
 }
