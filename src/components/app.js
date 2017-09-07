@@ -59,8 +59,11 @@ export default class App extends Component {
   constructor(props){
     super(props);
 
+    let loggedInFakeCookie = Boolean(localStorage.getItem('loggedIn'));
+    console.log(loggedInFakeCookie);
+
     this.state = {
-      loggedIn: false
+      loggedIn: loggedInFakeCookie
     }
   }
 
@@ -74,6 +77,12 @@ export default class App extends Component {
   }
   updateLoggedInState = ( isLoggedIn ) => {
     console.log('call updateLoggedIn');
-    this.setState({ loggedIn: true });
+    if(isLoggedIn) {
+        localStorage.setItem('loggedIn', true);
+    } else {
+      localStorage.removeItem('loggedIn'); //cannot pass boolean because localStorage stores only string value and string "false" is truthy
+    }
+
+    this.setState({ loggedIn: isLoggedIn });
   }
 }
